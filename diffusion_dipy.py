@@ -31,7 +31,7 @@ import nibabel as nib
 import matplotlib.pyplot as plt
 
 def load_data (PATH,diffusion_file_name,diffusion_bvalue,diffusion_bvec,brain_data):
-    #Function responsible to load diffusion and anatomical data. 
+    # Function responsible to load diffusion and anatomical data. 
     home = expanduser(PATH)
 
     for file in listdir(home):
@@ -51,7 +51,7 @@ def load_data (PATH,diffusion_file_name,diffusion_bvalue,diffusion_bvec,brain_da
     return diff, affine_diff, brain,affine_brain, gtab, img
 
 def denoise (diff,gtab,affine_diff):
-    #PCA-based denoising algorithms are effective denoising methods because they explore the redundancy of the multi-dimensional information of diffusion-weighted datasets.
+    # PCA-based denoising algorithms are effective denoising methods because they explore the redundancy of the multi-dimensional information of diffusion-weighted datasets.
 
     sigma = dipy.denoise.pca_noise_estimate.pca_noise_estimate(diff, gtab, correct_bias=True, smooth=3)
     den = localpca(diff, sigma, tau_factor=2.3, patch_radius=2)
@@ -165,7 +165,7 @@ def segmentation (brain,affine_brain,diff,affine_diff):
     return final_segmentation
 
 def tractography(brain,affine_brain,labels,diff,affine_diff, gtab,img):
-    #Tractography reconstruction based on EuDX determinist algorithm
+    # Tractography reconstruction based on EuDX determinist algorithm
 
     labels=segmentation (brain,affine_brain, diff,affine_diff)
     white_matter = (labels == 3)
